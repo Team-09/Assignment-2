@@ -1,0 +1,121 @@
+<html>
+  <head>
+    <script src="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.min.js"></script>
+    <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.indigo-pink.min.css">
+    <!-- Material Design icon font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  </head>
+    <style>
+        .demo-layout-transparent {
+      background: url('https://remixyourhealth.files.wordpress.com/2014/06/runner.jpg?w=8392&h=5352') center / cover;
+    }
+    .demo-layout-transparent .mdl-layout__header,
+    .demo-layout-transparent .mdl-layout__drawer-button {
+      color: white;
+    }
+    </style>
+  <body>
+    <!--Uses a transparent header that draws on top of the layout's background -->
+    <div class="demo-layout-transparent mdl-layout mdl-js-layout">
+      <header class="mdl-layout__header mdl-layout__header--transparent">
+        <div class="mdl-layout__header-row">
+          <!-- Title -->
+          <span class="mdl-layout-title">DO IT</span>
+        </div>
+      </header>
+      <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title">DO IT</span>
+        <nav class="mdl-navigation">
+          <a class="mdl-navigation__link" href="a">Home</a>
+          <a class="mdl-navigation__link" href="">Previous Runs</a>
+          <a class="mdl-navigation__link" href="">Best Runs</a>
+          <a class="mdl-navigation__link" href="">Log Out</a>
+          
+    <script>     
+    // Assigning variable to this keyword in order to reference public methods
+    var self = this;
+    self.currentLocation = { latitude: 0, longitude = 0 };
+    var route = [];
+    var startRecord = null;
+    var endRecord = null;
+    var time = new date;
+    var accuracy;
+    
+    var newRoutePageController = null;
+    
+    this.mapPageInitialised = function(controller,options)
+    {
+        console.log("Record route - mapPageInitialised")
+        newRoutePageController = controller;
+        var initialLocation = navigator.geolocation.getCurrentPosition(newPosition)
+        var watchID = navigator.geolocation.watchPosition(newPosition)
+    }
+    
+    function saveRecordedRoute()
+	{
+		if (typeof(Storage) !== "undefined")
+		{
+			console.log ("localStorage is available.");
+			var saveRoute = {dateCreated: time.toLocateString(), locations:Route};
+			var jsonRoute = JSON.stringify(saveRoute);
+            //var routeToSave = prompt("Please enter a name for route to be saved: ")
+			localStorage.setItem ("Route"+ Date.now(), jsonRoute);
+		}
+		else
+		{
+     newRoutePageController.displayMessage("Oops! Your browser does not appear to support localStorage.");
+		}
+	}
+    
+    function deleteRecordedRoute()
+    {
+        localStorage.getItem ("Route" + Date.now(), jsonRoute);
+        var parseRoute = JSON.parse(jsonRoute);
+        var deleteRoute = jsonRoute.delete;
+    }
+    
+    
+     function currentLocationAndAccuracy(position)
+    {
+            console.log(position.coords.latitude + ", " + position.coords.longitude + ", " + position.coords.accuracy);
+            accuracy = position.coords.accuracy;
+            newRoutePageController.panToLocation(position.coords.latitude, position.coords.longitude);
+
+            if (recStarted == true && recEnded != true)
+            {
+                Route.push({latitude: position.coords.latitude, longitude: position.coords.longitude, time: time, accuracy: accuracy});
+            }
+            else if (recStarted != true && recEnded != true)
+            {
+                self.currentLocation = {latitude: position.coords.latitude, longitude: position.coords.longitude};
+            }
+        
+this.mapPageShouldReturnFromDoneButtonTap = function()
+    {   
+			if(recEnded == true)
+			{
+				newRoutePageController.displayMessage(" 'Done' is allowed.");
+				console.log("Record Route - mapPageShouldReturnFromDoneButtonTap");
+				// Let the user return.
+				return true;
+			}
+			else
+			{
+				newRoutePageController.displayMessage(" 'Done' is not allowed.");
+				console.log("Incomplete Record - mapPageShouldReturnFromDoneButtonTap");
+				// Don't let the user return.
+				return false;
+			}
+    }
+</script>
+            
+          
+        </nav>
+      </div>
+      <main class="mdl-layout__content">
+      </main>
+    </div>
+
+    
+  </body>
+</html>
